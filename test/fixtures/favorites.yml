@@ -2,8 +2,10 @@
 
 one:
   guest_id: MyString
-  manufacturer: one
+  manufacturer_id: MyString
+  rename: MyString
 
 two:
   guest_id: MyString
-  manufacturer: two
+  manufacturer_id: MyString
+  rename: MyString

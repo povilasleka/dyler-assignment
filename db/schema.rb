@@ -10,22 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_10_201343) do
+ActiveRecord::Schema.define(version: 2021_06_11_082641) do
 
-  create_table "favorite_entries", force: :cascade do |t|
-    t.string "guest_id"
+  create_table "favorites", force: :cascade do |t|
+    t.string "guest_id", null: false
     t.integer "manufacturer_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["manufacturer_id"], name: "index_favorite_entries_on_manufacturer_id"
-  end
-
-  create_table "manufacturers", force: :cascade do |t|
-    t.string "name"
-    t.string "country"
+    t.string "rename"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "favorite_entries", "manufacturers"
 end
