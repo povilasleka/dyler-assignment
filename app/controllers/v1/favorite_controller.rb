@@ -17,10 +17,16 @@ module V1
             favorite = Favorite.create(favorite_params)
 
             if favorite.save
-                render json: { status: 'SUCCESS', data: favorite }, status: :ok
+                render json: { status: 'SUCCESS', data: favorite }, status: :created
             else
                 render json: { status: 'ERROR', data: favorite.errors }, status: :unprocessable_entry
             end
+        end
+
+        def destroy
+            Favorite.find(params[:id]).destroy!
+
+            head :no_content 
         end
 
         private

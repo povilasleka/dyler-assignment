@@ -42,7 +42,8 @@ class App extends React.Component<IProps, IState> {
     });
 
     axios.post('/v1/favorite', {
-      
+      guest_id: getGuestId(),
+      manufacturer_id: m.id
     });
   }
 
@@ -52,7 +53,10 @@ class App extends React.Component<IProps, IState> {
         .filter((f: Manufacturer) => f.id !== m.id)
     });
 
-    // TODO: Send DELETE /v1/favorite
+    axios.get('/v1/favorite/' + getGuestId()).then(response => {
+      let id = response.data.data.find((f:any) => f.manufacturer_id === m.id).id;
+      axios.delete('/v1/favorite/' + id);
+    });
   }
 
   render() {
@@ -60,11 +64,15 @@ class App extends React.Component<IProps, IState> {
       <Layout>
         <h3>Favorite manufacturers</h3>
         <hr />
-        <Favorites data={this.state.favorites}/>
+        <Favorites 
+          data={this.state.favorites}
+          removeFromFavorites={this.removeFromFavorites}/>
 
         <h3>Manufacturers list</h3>
         <hr />
-        <Table data={this.state.manufacturers} addToFavorites={this.addToFavorites}/>
+        <Table 
+          data={this.state.manufacturers} 
+          addToFavorites={this.addToFavorites} />
       </Layout>
     )
   }

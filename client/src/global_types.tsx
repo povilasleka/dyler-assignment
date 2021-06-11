@@ -3,3 +3,9 @@ export type Manufacturer = {
     name: string,
     country: string
 }
+
+export type Favorite = {
+    id: number,
+    rename: string,
+    manufacturer: Manufacturer
+}

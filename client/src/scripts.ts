@@ -16,11 +16,27 @@ export async function getMfrsAsync(): Promise<Manufacturer[]> {
 }
 
 export async function getFavMfrsAsync(uuid: string): Promise<Manufacturer[]> {
-    const response = await axios.get(`/v1/favorite/${uuid}`);
-    let mfrs: Manufacturer[] = response.data.data;
-    console.log(uuid);
+    const favEntries = (await axios.get(`/v1/favorite/${uuid}`)).data.data;
+    const allManufacturers: Manufacturer[] = await getMfrsAsync();
 
-    return mfrs;
+    let favoriteMan: Manufacturer[] = favEntries.map((f: any) => {
+        let mfr = allManufacturers.find((m: Manufacturer) => m.id === f.manufacturer_id);
+        if (mfr !== undefined) {
+            return {
+                id: mfr.id,
+                name: mfr.name,
+                country: mfr.country
+            }
+        } else {
+            return {
+                id: -1,
+                name: "undefined",
+                country: "undefined"
+            }
+        }
+    });
+    
+    return favoriteMan;
 }
 
 export function ensureGuestId(): void {

@@ -2,10 +2,11 @@ import React from 'react';
 import {Manufacturer} from '../global_types'
 
 interface IProps {
-    data: Manufacturer[]
+    data: Manufacturer[];
+    removeFromFavorites: (m:Manufacturer) => void;
 }
 
-const Favorites = function({ data }: IProps) {
+const Favorites = function({ data, removeFromFavorites }: IProps) {
     return (
         <ul className="list-unstyled row">
             {data.map((mfr) => (
@@ -14,7 +15,7 @@ const Favorites = function({ data }: IProps) {
                     <div className="card-body">
                         <h5 className="card-title" style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'clip' }}>{mfr.name}</h5>
                         <h6 className="card-subtitle mb-2 text-muted">{mfr.country}</h6>
-                        <button className="btn btn-danger btn-sm">Remove from favorites</button>
+                        <button className="btn btn-danger btn-sm" onClick={() => removeFromFavorites(mfr)}>Remove from favorites</button>
                     </div>
                 </div>
             </li>
