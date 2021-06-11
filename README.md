@@ -1,24 +1,18 @@
-# README
+# Vehicle manufacturers
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Start the application
+You can start the application back-end and front-end by running command below
+```
+foreman start
+```
+You can also run only back-end server by using the command 
+```
+rails s
+```
 
-Things you may want to cover:
+### Database schema
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+![database chema](https://i.imgur.com/1oAUEip.png)
+Database has only one table - favorites, it stores manufacturer id of the initial list.
+After receiving favorite manufacturer ids associated with specific user, it is possible
+to display only those manufacturers data.
