@@ -1,5 +1,5 @@
 import React from 'react'
-import { Manufacturer } from '../global_types'
+import { Manufacturer } from '../../global_types'
 
 interface IProps {
     mfr: Manufacturer;

@@ -1,11 +1,13 @@
 import React from 'react';
 import Layout from './components/layouts/Layout';
-import Favorites from './components/Favorites';
-import Table from './components/Table';
+import Favorites from './components/table/Favorites';
+import Table from './components/table/Table';
 
 import { Manufacturer } from './global_types';
-import { getMfrsAsync, getFavMfrsAsync, ensureGuestId, getGuestId } from './scripts';
-import axios from 'axios';
+import { ensureGuestId } from './scripts';
+
+import favorites from './adapters/favorite_api_adapter'
+import manufacturers from './adapters/manufacturers_api_adapter'
 
 interface IState {
   favorites: Manufacturer[];
@@ -21,18 +23,13 @@ class App extends React.Component<IProps, IState> {
   };
 
   async componentDidMount() {
-    // ensuring every guest an uuid in the local storage
     ensureGuestId();
 
-    // full manufacturers list
-    let mfrs = await getMfrsAsync();
-
-    // only guest's favorite manufacturers
-    let favMfrs = await getFavMfrsAsync(getGuestId());
-
     this.setState({ 
-      manufacturers: mfrs.slice(0,20).sort((x,y) => x.name.localeCompare(y.name)),
-      favorites: favMfrs
+      manufacturers: (await manufacturers.get())
+        .slice(0,20).sort((x,y) => x.name.localeCompare(y.name)),
+      
+      favorites: await favorites.get()
     });
   }
 
@@ -41,10 +38,7 @@ class App extends React.Component<IProps, IState> {
       favorites: [...this.state.favorites, m] 
     });
 
-    axios.post('/v1/favorite', {
-      guest_id: getGuestId(),
-      manufacturer_id: m.id
-    });
+    favorites.post(m);
   }
 
   removeFromFavorites = (m: Manufacturer): void => {
@@ -53,10 +47,7 @@ class App extends React.Component<IProps, IState> {
         .filter((f: Manufacturer) => f.id !== m.id)
     });
 
-    axios.get('/v1/favorite/' + getGuestId()).then(response => {
-      let id = response.data.data.find((f:any) => f.manufacturer_id === m.id).id;
-      axios.delete('/v1/favorite/' + id);
-    });
+    favorites.delete(m);
   }
 
   render() {

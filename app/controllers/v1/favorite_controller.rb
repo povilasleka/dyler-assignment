@@ -1,12 +1,6 @@
 module V1
     class FavoriteController < ApplicationController
-        # GET /v1/favorite
-        def index
-            favorites = Favorite.all
-            render json: { status: 'SUCCESS', data: favorites }, status: :ok
-        end
-
-        # GET /v1/favorite/:guest_id
+        # GET /v1/favorite/{:guest_id}
         def show
             favorites = Favorite.where(guest_id: params[:id])
             render json: { status: 'SUCCESS', data: favorites }, status: :ok
@@ -23,16 +17,24 @@ module V1
             end
         end
 
+        # DELETE /v1/favorite/{:id}
         def destroy
-            Favorite.find(params[:id]).destroy!
+            Favorite.find(params[:id]).destroy
 
             head :no_content 
+        end
+
+        # PUT /v1/favorite/{:id}
+        def update 
+            Favorite.find(params[:id]).update(favorite_params)
+
+            head :no_content
         end
 
         private
 
         def favorite_params
-            params.permit(:guest_id, :manufacturer_id, :rename)
+            params.permit(:guest_id, :manufacturer_id, :name, :country)
         end
     end
 end
