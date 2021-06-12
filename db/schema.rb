@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 2021_06_12_122314) do
   create_table "favorites", force: :cascade do |t|
     t.string "guest_id", limit: 36, null: false
     t.integer "manufacturer_id", null: false
-    t.string "name", limit: 50
+    t.string "name", limit: 50, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "country", limit: 50

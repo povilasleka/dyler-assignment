@@ -1,11 +1,7 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  guest_id: MyString
-  manufacturer_id: MyString
-  rename: MyString
-
-two:
-  guest_id: MyString
-  manufacturer_id: MyString
-  rename: MyString
+  guest_id: guid
+  manufacturer_id: 995
+  name: BMW
+  country: Lithuania

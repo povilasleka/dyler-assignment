@@ -1,13 +1,13 @@
 import React from 'react';
 import Layout from './components/layouts/Layout';
-import Favorites from './components/table/Favorites';
+import FavoriteList from './components/FavoriteList';
 import Table from './components/table/Table';
 
 import { Manufacturer } from './global_types';
-import { ensureGuestId } from './scripts';
 
 import favorites from './adapters/favorite_api_adapter'
 import manufacturers from './adapters/manufacturers_api_adapter'
+import localIdGenerator from './scripts/guest_id_provider'
 
 interface IState {
   favorites: Manufacturer[];
@@ -23,7 +23,7 @@ class App extends React.Component<IProps, IState> {
   };
 
   async componentDidMount() {
-    ensureGuestId();
+    localIdGenerator.ensureId();
 
     this.setState({ 
       manufacturers: (await manufacturers.get())
@@ -50,14 +50,19 @@ class App extends React.Component<IProps, IState> {
     favorites.delete(m);
   }
 
+  renameFavorite = (m: Manufacturer): void => {
+    favorites.update(m);
+  }
+
   render() {
     return (
       <Layout>
         <h3>Favorite manufacturers</h3>
         <hr />
-        <Favorites 
+        <FavoriteList 
           data={this.state.favorites}
-          removeFromFavorites={this.removeFromFavorites}/>
+          handleRemoveButton={this.removeFromFavorites}
+          handleUpdate={this.renameFavorite}/>
 
         <h3>Manufacturers list</h3>
         <hr />
