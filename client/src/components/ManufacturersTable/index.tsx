@@ -15,7 +15,7 @@ const Table = function({ data, addToFavorites }: IProps) {
           <th scope="col">Manufacturer ID</th>
           <th scope="col">Manufacturer Name</th>
           <th scope="col">Country</th>
-          <th scope="col">Add as favorite</th>
+          <th scope="col">Add to favorites</th>
         </tr>
       </thead>
       <tbody>

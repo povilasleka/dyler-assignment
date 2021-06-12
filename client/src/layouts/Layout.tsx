@@ -1,5 +1,5 @@
 import React from 'react';
-import Navigation from '../navbar/Navigation';
+import Navigation from '../components/Navigation';
 
 interface IProps {
   children: React.ReactNode

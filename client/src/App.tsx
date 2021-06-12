@@ -1,7 +1,7 @@
 import React from 'react';
-import Layout from './components/layouts/Layout';
+import Layout from './layouts/Layout';
 import FavoriteList from './components/FavoriteList';
-import Table from './components/table/Table';
+import Table from './components/ManufacturersTable';
 
 import { Manufacturer } from './global_types';
 
@@ -34,6 +34,9 @@ class App extends React.Component<IProps, IState> {
   }
 
   addToFavorites = (m: Manufacturer): void => {
+    if (this.state.favorites.includes(m as never))
+      return;
+
     this.setState({ 
       favorites: [...this.state.favorites, m] 
     });
