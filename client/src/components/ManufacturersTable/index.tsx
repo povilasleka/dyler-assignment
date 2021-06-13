@@ -1,5 +1,4 @@
 import React from 'react';
-import TableRow from './TableRow';
 import { Manufacturer } from '../../global_types';
 
 interface IProps {
@@ -7,28 +6,35 @@ interface IProps {
   data: Manufacturer[];
 }
 
-const Table = function({ data, addToFavorites }: IProps) {
-  return (
-    <table className="table table-hover">
-      <thead>
-        <tr>
-          <th scope="col">Manufacturer ID</th>
-          <th scope="col">Manufacturer Name</th>
-          <th scope="col">Country</th>
-          <th scope="col">Add to favorites</th>
-        </tr>
-      </thead>
-      <tbody>
-
-        {data.map(mfr => 
-          <TableRow 
-            mfr={mfr} 
-            handleClick={addToFavorites} 
-          />)}
-          
-      </tbody>
-    </table>
-  );
-}
+const Table = function({ data, addToFavorites }: IProps): JSX.Element {
+	return (
+		<table className="table table-hover">
+			<thead>
+				<tr>
+					<th scope="col">Manufacturer ID</th>
+					<th scope="col">Manufacturer Name</th>
+					<th scope="col">Country</th>
+					<th scope="col">Add to favorites</th>
+				</tr>
+			</thead>
+			<tbody>
+				{data.map((mfr, key) => (
+					<tr key={key}>
+						<th scope="row">{mfr.id}</th>
+						<td>{mfr.name}</td>
+						<td>{mfr.country}</td>
+						<td>
+							<button className="btn btn-outline-success btn-sm w-50" 
+								onClick={() => addToFavorites(mfr)} 
+								style={{ borderRadius: '1em'}}>
+								+ Fav
+							</button>
+						</td>
+					</tr>
+				))}
+			</tbody>
+		</table>
+	);
+};
 
 export default Table;

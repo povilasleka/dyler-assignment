@@ -5,15 +5,15 @@ interface IProps {
   children: React.ReactNode
 }
 
-const Layout = function ({ children }: IProps) {
-  return (
-    <>
-      <Navigation />
-      <div className="container">
-          {children}
-      </div>
-    </>
-  );
-}
+const Layout = function ({ children }: IProps): JSX.Element {
+	return (
+		<>
+			<Navigation />
+			<div className="container">
+				{children}
+			</div>
+		</>
+	);
+};
 
 export default Layout;
