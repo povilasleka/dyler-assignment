@@ -1,7 +1,0 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  guest_id: guid
-  manufacturer_id: 995
-  name: BMW
-  country: Lithuania
