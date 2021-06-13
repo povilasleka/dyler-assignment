@@ -1,5 +1,3 @@
-
-
 import axios from 'axios';
 import { Manufacturer } from '../global_types';
 import localIdProvider from '../scripts/guest_id_provider';
