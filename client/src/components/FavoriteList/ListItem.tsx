@@ -1,11 +1,23 @@
 import React, { useState } from 'react';
 import { Manufacturer } from '../../global_types';
+import CSS from 'csstype';
 
 interface IProps {
     mfr: Manufacturer;
     handleRemoveButton: (m: Manufacturer) => void;
     handleUpdate: (m: Manufacturer) => void;
 }
+
+// css styling
+const cardTitleStyle: CSS.Properties = { 
+	whiteSpace: 'nowrap', 
+	overflow: 'hidden', 
+	textOverflow: 'clip'
+};
+
+const renameInputStyle: CSS.Properties = {
+	height: '28px'
+};
 
 const Favorites = function({ mfr, handleRemoveButton, handleUpdate }: IProps): JSX.Element {
 	const [renaming, setRenaming] = useState(false);
@@ -27,7 +39,7 @@ const Favorites = function({ mfr, handleRemoveButton, handleUpdate }: IProps): J
 					
 					{!renaming && 
 						<h5 className="card-title" 
-							style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'clip' }}>
+							style={cardTitleStyle}>
 							{mfr.name}
 						</h5>}
 
@@ -36,7 +48,7 @@ const Favorites = function({ mfr, handleRemoveButton, handleUpdate }: IProps): J
 							<input type="text" 
 								className="form-control mb-1" 
 								aria-describedby="inputGroup-sizing-sm" 
-								style={{ height: '28px' }}
+								style={renameInputStyle}
 								value={name}
 								onChange={(e) => setName(e.target.value)}
 							/>

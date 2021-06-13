@@ -1,5 +1,10 @@
 import React from 'react';
 import { Manufacturer } from '../../global_types';
+import CSS from 'csstype';
+
+const addButtonStyle: CSS.Properties = {
+	borderRadius: '1em'
+};
 
 interface IProps {
   addToFavorites: (m: Manufacturer) => void;
@@ -18,6 +23,7 @@ const Table = function({ data, addToFavorites }: IProps): JSX.Element {
 				</tr>
 			</thead>
 			<tbody>
+
 				{data.map((mfr, key) => (
 					<tr key={key}>
 						<th scope="row">{mfr.id}</th>
@@ -26,12 +32,13 @@ const Table = function({ data, addToFavorites }: IProps): JSX.Element {
 						<td>
 							<button className="btn btn-outline-success btn-sm w-50" 
 								onClick={() => addToFavorites(mfr)} 
-								style={{ borderRadius: '1em'}}>
+								style={addButtonStyle}>
 								+ Fav
 							</button>
 						</td>
 					</tr>
 				))}
+				
 			</tbody>
 		</table>
 	);

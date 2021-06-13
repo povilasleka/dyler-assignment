@@ -59,7 +59,7 @@ class App extends React.Component<Record<string, unknown>, IState> {
 		return (
 			<Layout>
 				<h3>Favorite manufacturers</h3>
-				<FavoriteList 
+				<FavoriteList
 					data={this.state.favorites}
 					handleRemoveButton={this.removeFromFavorites}
 					handleUpdate={this.renameFavorite}/>
